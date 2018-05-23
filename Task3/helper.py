@@ -17,14 +17,18 @@ def info(a, b, epsilon, m, n, h, f):
 def my_func(x):
     """Функция задачи."""
     return math.exp(-x) - pow(x,2) / 2
+    #return math.exp(x)
 
 
 def my_func_d_1(x):
     return -x - math.exp(-x)
+    #return math.exp(x)
 
 
 def my_func_d_2(x):
     return math.exp(-x) - 1
+    #return math.exp(x)
+
 
 def set_setting(a, b, n, m, func):
     """Устанавливает начальные параметры для задачи. Проверка на дурака минимальная."""
@@ -232,7 +236,7 @@ def method_bisection(interval_root, func, t, n, f, epsilon=pow(10, -8), order_ep
         delta = (b - a) / 2
         m_fX = abs(func(X, t, n, f))
         print("Корень №", counter, " | Начальные приближения : ", i[0], " ; ", i[1], " | Количество шагов : ", step)
-        print("X = ", X, "; delta = ", delta) # , " ; |f(X)-0| = ", m_fX
+        print("X = ", X, "; delta = ", delta)  # , " ; |f(X)-0| = ", m_fX
         root.append(X)
     print("___________________________________________________________________")
     return root
@@ -257,16 +261,19 @@ def step_two(a, b, h, m, func, func_d, func_d_2):
         table.append((start, func(start)))
         start += h
 
-    for i in range(0, m+1):
-        if i == m:
-            f_d_1 = (table[i][1] - table[i-1][1]) / h
-            memory = func_d(table[i][0])
-            table_d.append((f_d_1, abs(f_d_1 - memory)))
-        else:
-            f_d_1 = (table[i+1][1] - table[i][1]) / h
-            memory = func_d(table[i][0])
-            table_d.append((f_d_1, abs(f_d_1 - memory)))
+    # Первая производная
+    f_d_1 = (table[1][1] - table[0][1]) / h
+    memory = func_d(table[0][0])
+    table_d.append((f_d_1, abs(f_d_1 - memory)))
+    for i in range(1, m):
+        f_d_1 = (table[i + 1][1] - table[i-1][1]) / (2*h)
+        memory = func_d(table[i][0])
+        table_d.append((f_d_1, abs(f_d_1 - memory)))
+    f_d_1 = (table[m][1] - table[m - 1][1]) / h
+    memory = func_d(table[m][0])
+    table_d.append((f_d_1, abs(f_d_1 - memory)))
 
+    # Вторая производная
     for i in range(1, len(table) - 1):
         memory = (table[i + 1][1] + table[i - 1][1] - 2 * table[i][1]) / (h * h)
         table_d_2.append((memory, abs(memory - func_d_2(table[i][0]))))
