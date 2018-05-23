@@ -1,0 +1,12 @@
+Переменные:
+    interval: лист интервалов в которых есть корень
+    A  - левая граница
+    B  - правая граница
+    eps = pow(10, -5) - погрешность
+    eps_order = 5 - порядок погрешности
+    H = input_data(A, B)  # Возвращает шаг
+    interval = roots_step(A, B, H, my_func)  # Отделение корней
+    root = method_bisection(interval, my_func, eps, eps_order)
+
+Функции:
+    info(A, B, eps)  # Выводит вводную информацию
