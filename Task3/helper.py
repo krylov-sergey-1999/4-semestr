@@ -247,6 +247,15 @@ def print_discrepancy(root, func, f):
         print("Невязка для корня: ", i, " равна |f(root) - F| = ", abs(func(i) - f))
     print("___________________________________________________________________")
 
+def fix(x):
+    x = str(x)
+    s = ""
+    for i in range(20):
+        if i >= len(x):
+            s = s + " "
+        else:
+            s = s + x[i]
+    return s
 
 def step_two(a, b, h, m, func, func_d, func_d_2):
     print("Формулы численного дифференцирования")
@@ -262,14 +271,14 @@ def step_two(a, b, h, m, func, func_d, func_d_2):
         start += h
 
     # Первая производная
-    f_d_1 = (table[1][1] - table[0][1]) / h
+    f_d_1 = (-3*table[0][1] + 4 * table[1][1] - table[2][1]) / (2*h)
     memory = func_d(table[0][0])
     table_d.append((f_d_1, abs(f_d_1 - memory)))
     for i in range(1, m):
         f_d_1 = (table[i + 1][1] - table[i-1][1]) / (2*h)
         memory = func_d(table[i][0])
         table_d.append((f_d_1, abs(f_d_1 - memory)))
-    f_d_1 = (table[m][1] - table[m - 1][1]) / h
+    f_d_1 = (3*table[m][1] - 4 * table[m - 1][1] + table[m-2][1]) / (2*h)
     memory = func_d(table[m][0])
     table_d.append((f_d_1, abs(f_d_1 - memory)))
 
@@ -278,9 +287,15 @@ def step_two(a, b, h, m, func, func_d, func_d_2):
         memory = (table[i + 1][1] + table[i - 1][1] - 2 * table[i][1]) / (h * h)
         table_d_2.append((memory, abs(memory - func_d_2(table[i][0]))))
 
-    for i in table:
-        print("x_i =", i[0], "; f(x_i)=", i[1])
-    for i in table_d:
-        print("f'(x_i) ЧД =", i[0], "; abs(f'(x_i)т - f'(x_i)ЧД)=", i[1])
-    for i in table_d_2:
-        print("f''(x_i) ЧД =", i[0], "; abs(f''(x_i)т - f''(x_i)ЧД)=", i[1])
+    for i in range(len(table)):
+        s = "Узел " + str(i)
+        print(fix(s),end="")
+    for i in range(len(table)):
+        s = "x_" + str(i) + " = " + str(table[i][0])
+        print(fix(s),end="")
+    for i in range(len(table)):
+        s = "x_" + str(i) + " = " + str(table[i][1])
+        print(fix(s),end="")
+    for i in range(len(table)):
+        s = "f(x_" + str(i) + " = " + str(table[i][0])
+        print(fix(s),end="")

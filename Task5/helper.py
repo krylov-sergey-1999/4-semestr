@@ -6,7 +6,7 @@ def info(a, b, m):
     print("Начальные данные [A; B] = [", a, ";", b, "]")
     print("M = ", m)
     print("f(x) = math.sin(x)")
-    print("w(x) = -math.log(x)")
+    print("w(x) = 1/pow(x,1/4)")
 
 
 def my_func_f(x):
@@ -14,7 +14,7 @@ def my_func_f(x):
 
 
 def my_func_w(x):
-    return -math.log(x)
+    return 1/pow(x,1/4)
 
 def my_func_f_w(x):
     return my_func_f(x)*my_func_w(x)
