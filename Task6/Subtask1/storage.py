@@ -15,6 +15,7 @@ def info(x0, k, N, h):
 def set_initial_data():
     """Возвращает x0, k, N, h, table"""
     x0 = 0
+    y0 = 0
     k = -2
     N = 10
     h = 0.1
@@ -22,7 +23,7 @@ def set_initial_data():
     for i in range(k, N):
         node = x0 + i * h
         table.append([i, node, exact_solution(node)])
-    return x0, k, N, h, table
+    return x0, y0, k, N, h, table
 
 
 def exact_solution(x):
