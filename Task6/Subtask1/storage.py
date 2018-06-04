@@ -9,6 +9,7 @@ def info(x0, k, N, h):
     print("h =", h)
     print("N =", N)
     print("k =", k)
+    print()
 
 
 def set_initial_data():
