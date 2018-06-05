@@ -250,7 +250,9 @@ def print_discrepancy(root, func, f):
 def fix(x):
     x = str(x)
     s = ""
-    for i in range(20):
+    if len(x) > 25:
+        x = x[0:23]
+    for i in range(35):
         if i >= len(x):
             s = s + " "
         else:
@@ -290,12 +292,30 @@ def step_two(a, b, h, m, func, func_d, func_d_2):
     for i in range(len(table)):
         s = "Узел " + str(i)
         print(fix(s),end="")
+    print()
     for i in range(len(table)):
         s = "x_" + str(i) + " = " + str(table[i][0])
         print(fix(s),end="")
+    print()
     for i in range(len(table)):
-        s = "x_" + str(i) + " = " + str(table[i][1])
+        s = "f(x_" + str(i) + ") = " + str(table[i][1])
         print(fix(s),end="")
-    for i in range(len(table)):
-        s = "f(x_" + str(i) + " = " + str(table[i][0])
+    print()
+    for i in range(len(table_d)):
+        s = "f'(x_" + str(i) + ") = " + str(table_d[i][0])
         print(fix(s),end="")
+    print()
+    for i in range(len(table_d)):
+        s = "|f'-f'нд|(" + str(i) + ") = " + str(table_d[i][1])
+        print(fix(s),end="")
+    print()
+    print(fix(""), end="")
+    for i in range(len(table_d_2)):
+        s = "f''(x_" + str(i+1) + ") = " + str(table_d_2[i][0])
+        print(fix(s),end="")
+    print()
+    print(fix(""), end="")
+    for i in range(len(table_d_2)):
+        s = "|f''-f''нд|(" + str(i+1) + ") = " + str(table_d_2[i][1])
+        print(fix(s),end="")
+    print()
