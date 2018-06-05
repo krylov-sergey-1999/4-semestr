@@ -1,6 +1,6 @@
 def f(x, y):
-    return -y * y + 1
-    #return -y + x
+    #return -y * y + 1
+    return -y + x
 
 
 def method_Euler(x0,y0, h, table, N,table_rez):
