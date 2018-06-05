@@ -2,16 +2,16 @@ from Task6.Subtask23.storage import *
 
 
 def f(x, y):
-    # return -y * y + 1
+    #return -y * y + 1
     return -y + x
 
 
-def methodAdamca(k, table, x0, table_up, h, q=2):
+def methodAdamca(k, table, x0, table_up, h,table_rez, q=2):
     #arr = start_method_taylor(k, q, table, x0, False)
     arr = []
     for i in range(0,5):
         arr.append([table[i][1],table[i][2]])
-    #
+
     for i in range(3, len(table_up)):
         arr.append([table_up[i]])
     l = len(arr)
@@ -29,7 +29,7 @@ def methodAdamca(k, table, x0, table_up, h, q=2):
         t = arr[i - 1][1] + q(i - 1) + 1 / 2 * delta_q(i - 2, 1) + 5 / 12 * delta_q(i - 3, 2) + 3 / 8 * delta_q(i - 4,3) + 251 / 720 * delta_q(i - 5, 4)
         (arr[i]).append(t)
     l = len(arr)
-    print("Метод Адамса   4-го порядка")
+    print("\n\nМетод Адамса   4-го порядка")
     print(reg("Узел:"), end=" ")
     for i in range(l):
         print(reg(arr[i][0]), end=" ")
@@ -37,7 +37,7 @@ def methodAdamca(k, table, x0, table_up, h, q=2):
     print(reg("Значение:"), end=" ")
     for i in range(l):
         print(reg(arr[i][1]), end=" ")
-
+    table_rez.append(arr[l - 1][1])
 
 
 def reg(x):

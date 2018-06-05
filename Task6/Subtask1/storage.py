@@ -16,10 +16,10 @@ def info(x0, y0, k, N, h):
 def set_initial_data():
     """Возвращает x0, k, N, h, table"""
     x0 = 0
-    y0 = 1
+    y0 = 1 #0
     k = -2
     N = 10
-    h = 0.1
+    h = 0.01
     table = []
     for i in range(k, N):
         node = x0 + i * h
@@ -29,7 +29,7 @@ def set_initial_data():
 
 def exact_solution(x):
     # Точное решение
-    # y = (math.exp(2 * x) - 1) / (math.exp(2 * x) + 1)
+    #y = (math.exp(2 * x) - 1) / (math.exp(2 * x) + 1)
     y = x + 2 * math.exp(-x) - 1
     return y
 
@@ -46,7 +46,7 @@ def nice_conclusion_table(o):
     print("\n", "Значение:", sep="", end=" ")
     for i in o:
         print(reg(i[2]), end=" ")
-    print("\n")
+    print("")
 
 
 def reg(x):

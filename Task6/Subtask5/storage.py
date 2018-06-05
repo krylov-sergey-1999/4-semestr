@@ -1,8 +1,8 @@
 def f(x, y):
     return -y + x
+    #return -y * y + 1
 
-
-def runge_kutta_4(x0, y0, h, table, N):
+def runge_kutta_4(x0, y0, h, table, N,table_rez):
     k1 = h * f(x0, y0)
     k2 = h * f(x0 + h / 2, y0 + k1 / 2)
     k3 = h * f(x0 + h / 2, y0 + k2 / 2)
@@ -18,7 +18,7 @@ def runge_kutta_4(x0, y0, h, table, N):
         k3 = h * f(table[i] + h / 2, arr[i][1] + k2 / 2)
         k4 = h * f(table[i] + h, arr[i][1] + k3)
 
-    print("\nМетод Рунге-Кутта")
+    print("\n\nМетод Рунге-Кутта")
     print(reg("Узел:"), end=" ")
     for i in range(1, l):
         print(reg(i), end=" ")
@@ -26,6 +26,7 @@ def runge_kutta_4(x0, y0, h, table, N):
     print(reg("Значение:"), end=" ")
     for i in range(1, l):
         print(reg(arr[i][1]), end=" ")
+    table_rez.append(arr[l - 1][1])
 
 
 
