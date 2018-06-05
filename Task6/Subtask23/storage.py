@@ -9,14 +9,15 @@ def methodtaylor(x, x0, table):
     i = 2
     k = 5
     s = [0]
-    if x - x0 == 0:
-        return sum(s)
     while k != 0:
         temporary = table[2][i] / math.factorial((i - 2)) * pow(x - x0, i - 2)
         i += 1
         if temporary != 0:
             k -= 1
             s.append(temporary)
+        else:
+            if x - x0 == 0:
+                return sum(s)
     return sum(s)
 
 
@@ -34,20 +35,23 @@ def diff(arr, h):
         k += 1
 
 
-def start_method_taylor(k, q, table, x0):
+def start_method_taylor(k, q, table, x0,log = True):
     start = 0
+    arr = []
     while True:
         if k <= table[start][0] <= q:
             x = table[start][1]
             t = methodtaylor(x, x0, table)
+            arr.append([x,t])
             r = exact_solution(x)
-            print("Индекс: ", table[start][0], "Значение найденное методом Тейлора:", t)
-            print("Абсолютная погрешность метода разложения в ряд Тейлора:",abs(t - r))
-            print()
+            if log:
+                print("Индекс: ", table[start][0], "Значение найденное методом Тейлора:", t)
+                print("Абсолютная погрешность метода разложения в ряд Тейлора:",abs(t - r))
+                print()
             start += 1
         else:
             break
-
+    return arr
 
 def nice_conclusion_table_update(o):
     """Красивый вывод таблицы"""
