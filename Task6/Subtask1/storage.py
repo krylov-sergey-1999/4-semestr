@@ -1,11 +1,12 @@
 import math
 
 
-def info(x0, k, N, h):
+def info(x0, y0, k, N, h):
     """Выводит информацию о задаче."""
     print("Численное решение Задачи Коши для обыкновенного дифференциального уравнения первого порядка")
     print("y'(x) = - y^2(x) + 1")
     print("x0 =", x0)
+    print("y0 =", y0)
     print("h =", h)
     print("N =", N)
     print("k =", k)
@@ -15,7 +16,7 @@ def info(x0, k, N, h):
 def set_initial_data():
     """Возвращает x0, k, N, h, table"""
     x0 = 0
-    y0 = 0
+    y0 = 1
     k = -2
     N = 10
     h = 0.1
@@ -28,7 +29,8 @@ def set_initial_data():
 
 def exact_solution(x):
     # Точное решение
-    y = (math.exp(2 * x) - 1) / (math.exp(2 * x) + 1)
+    # y = (math.exp(2 * x) - 1) / (math.exp(2 * x) + 1)
+    y = x + 2 * math.exp(-x) - 1
     return y
 
 
@@ -55,3 +57,11 @@ def reg(x):
     for i in range(n):
         s = s + " "
     return s
+
+
+def table_update(table, k):
+    table_up = []
+    l = len(table)
+    for i in range(abs(k), l):
+        table_up.append(table[i][1])
+    return table_up
